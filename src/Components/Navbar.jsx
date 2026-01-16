@@ -7,6 +7,7 @@ import { signOut } from 'firebase/auth';
 import { toast } from 'react-toastify';
 import { auth } from '../firebase/firebase.config';
 import { RingLoader } from 'react-spinners';
+import logoimg from "../assets/logo.png"
 
 const Navbar = () => {
   const { user, setUser,loading } = useContext(AuthContext);
@@ -29,7 +30,7 @@ const Navbar = () => {
 
   return (
 
-    <MyComponent className="navbar bg-base-100 w-11/12 mx-auto  rounded-xl">
+    <MyComponent className="navbar border-b border-gray-400 w-full mx-auto  rounded-sm">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -45,7 +46,7 @@ const Navbar = () => {
             <li><a>Contact</a></li>
           </ul>
         </div>
-        <a className="btn btn-ghost text-xl">Firebase</a>
+        <a className="btn btn-ghost text-xl"><img className='w-10 h-10 rounded-full' src={logoimg} alt="img" /></a>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
@@ -89,7 +90,7 @@ const Navbar = () => {
                 
                 <button
                   onClick={handleSignout}
-                  className="btn btn-sm bg-blue-500 text-white w-full"
+                  className="btn btn-sm bg-emerald-400 text-white w-full"
                 >
                   Sign Out
                 </button>
@@ -98,7 +99,7 @@ const Navbar = () => {
             
           </div>
         ) : (
-          <NavLink to="/login" className="btn bg-blue-500 text-white">
+          <NavLink to="/login" className="btn bg-emerald-400 text-white">
             Sign in
           </NavLink>
         )}

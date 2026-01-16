@@ -5,6 +5,7 @@ import ModernHero from '../Components/Hero';
 import WhyChooseUs from '../Components/WhyChooseUs';
 import OurFeatures from '../Components/OurFeatures';
 import HowItWorks from '../Components/HowItWorks';
+import WhoIsItFor from '../Components/WhoIsItFor';
 
 const Home = () => {
     return (
@@ -18,6 +19,9 @@ const Home = () => {
         </div>
         <div className='mt-3'>
             <HowItWorks/>
+        </div>
+        <div className='mt-3'>
+            <WhoIsItFor/>
         </div>
         </div>
     );

@@ -42,15 +42,15 @@ const WhyChooseUs = () => {
           initial={{ y: -50, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8 }}
-          className="text-3xl md:text-4xl font-bold text-white mb-4"
+          className="text-4xl md:text-5xl font-bold text-white mb-4"
         >
-          Why Choose Us
+          Why <span className="text-emerald-400">Choose Us</span>
         </motion.h2>
         <motion.p
           initial={{ y: 50, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="text-gray-600 max-w-2xl mx-auto mb-12"
+          className="text-gray-400 max-w-2xl mx-auto mb-12"
         >
           Discover the reasons why hundreds of users trust our platform to
           enhance their skills, collaborate seamlessly, and achieve their goals.
@@ -64,13 +64,13 @@ const WhyChooseUs = () => {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: idx * 0.2 }}
-              className="bg-white rounded-xl p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300 flex flex-col items-center text-center"
+              className=" bg-slate-900/60  rounded-xl p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300 flex flex-col items-center text-center"
             >
               <div className="mb-4">{feature.icon}</div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">
+              <h3 className="text-xl font-semibold text-white mb-2">
                 {feature.title}
               </h3>
-              <p className="text-gray-600">{feature.description}</p>
+              <p className="text-gray-400">{feature.description}</p>
             </motion.div>
           ))}
         </div>

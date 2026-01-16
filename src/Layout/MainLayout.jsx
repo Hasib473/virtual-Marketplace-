@@ -8,7 +8,7 @@ import VantaBackground from "../Components/VantaBackground";
 const MainLayout = () => {
   return (
     <div className="relative min-h-screen overflow-hidden">
-      <div className="pt-4 ">
+      <div>
         <Navbar/>
       </div>
     

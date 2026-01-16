@@ -66,8 +66,8 @@ const OurFeatures = () => {
   return (
     <section className="py-20 w-full">
       <div className="max-w-7xl mx-auto px-6 text-center">
-        <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-          Our Features
+        <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+          Our <span className="text-emerald-400">Features</span>
         </h2>
         <p className="text-white max-w-2xl mx-auto mb-12">
           Explore the powerful tools and services we provide to help you grow,

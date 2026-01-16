@@ -1,25 +1,28 @@
 // ModernHero.jsx
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import sliderimg from "../assets/slideronly.webp"
+import slider2img from "../assets/s2.jfif"
+import slider3img from "../assets/images.jfif"
 
 const slides = [
   {
     id: 1,
     title: "Grow Your Skills, Unlock Opportunities",
     subtitle: "Connect, collaborate, and achieve more with our platform.",
-    image: "https://source.unsplash.com/1600x900/?technology,ai",
+    image: sliderimg,
   },
   {
     id: 2,
     title: "Work Together in Real-Time",
     subtitle: "Seamless collaboration across teams, anytime, anywhere.",
-    image: "https://source.unsplash.com/1600x900/?office,team",
+    image: slider2img,
   },
   {
     id: 3,
     title: "Boost Your Career to the Next Level",
     subtitle: "Track your progress, find opportunities, and grow.",
-    image: "https://source.unsplash.com/1600x900/?career,success",
+    image: slider3img,
   },
 ];
 

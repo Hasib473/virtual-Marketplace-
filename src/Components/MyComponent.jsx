@@ -2,7 +2,7 @@ import React from 'react';
 
 const MyComponent = ({className , children}) => {
     return (
-        <div className={`${className} container mx-auto`}>
+        <div className={`${className} `}>
             {children}
         </div>
     );

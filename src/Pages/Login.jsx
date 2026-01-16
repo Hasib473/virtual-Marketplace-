@@ -1,133 +1,190 @@
-import React, {  use, useContext, useRef, useState } from 'react';
-import SignUp from './SignUp';
-import { Link, useLocation, useNavigate } from 'react-router';
-import { FaEye, FaGoogle } from 'react-icons/fa';
-import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
-import { auth } from '../firebase/firebase.config';
-import { toast } from 'react-toastify';
-import { IoEyeOff } from 'react-icons/io5';
-import { AuthContext } from '../Contexts/AuthContext';
-
+import React, { useContext, useEffect, useRef, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router";
+import { FaEye, FaGoogle } from "react-icons/fa";
+import { IoEyeOff } from "react-icons/io5";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { toast } from "react-toastify";
+import { auth } from "../firebase/firebase.config";
+import { AuthContext } from "../Contexts/AuthContext";
 
 const googleProvider = new GoogleAuthProvider();
 
 const Login = () => {
   const location = useLocation();
-  const form = location.state || '/';
-  console.log('Current location:', location);
-  const nevigate =useNavigate();
+  const navigate = useNavigate();
 
-  const {sendPasswordResetEmailFun , 
-    signInWithEmailAndPasswordFun
-    ,setUser,user} 
+  const from = location.state?.from || "/dashboard";
 
-  = useContext(AuthContext);
+  const {
+    sendPasswordResetEmailFun,
+    signInWithEmailAndPasswordFun,
+    setUser,
+    user,
+    loading,
+  } = useContext(AuthContext);
 
-  if(user) {
-    nevigate('/')
-    return;
-  }
- 
   const [show, setShow] = useState(false);
-  const emailref = useRef(null);
+  const emailRef = useRef(null);
 
+  /* 🔐 already logged in → dashboard */
+  useEffect(() => {
+    if (user) {
+      navigate("/dashboard");
+    }
+  }, [user, navigate]);
+
+  /* 🔁 Reset Password */
   const handleReset = () => {
-    console.log(emailref.current.value);
-    const email = emailref.current.value;
-    if(!email){
-      toast.error('Please enter your email address');
+    const email = emailRef.current?.value;
+    if (!email) {
+      toast.error("Please enter your email first");
       return;
     }
-    sendPasswordResetEmailFun(email).then(() => {
-      toast.success('Password reset email sent');
-    }).catch((err) => {
-      console.log(err);
-      toast.error(err.message);
-    })
 
-  }
+    sendPasswordResetEmailFun(email)
+      .then(() => toast.success("Password reset email sent"))
+      .catch((err) => toast.error(err.message));
+  };
+
+  /* 📧 Email + Password Login */
   const handleLogin = (e) => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
-    console.log(email, password)
 
-    signInWithEmailAndPasswordFun(email, password).then((res) => {
+    signInWithEmailAndPasswordFun(email, password)
+      .then((res) => {
         if (!res.user.emailVerified) {
-          toast.error('Please verify your email before logging in');
+          toast.error("Please verify your email before login");
           return;
         }
-        console.log(res);
+
         setUser(res.user);
-        
-        toast.success('Login successful');
-        nevigate(form);
-      }).catch((err) => {
-        console.log(err);
-        toast.error(err.message);
+        toast.success("Login successful");
+        navigate(from, { replace: true });
       })
-
-
+      .catch((err) => toast.error(err.message));
   };
 
-  
-
+  /* 🟢 Google Login */
   const handleGoogleSignIn = () => {
     signInWithPopup(auth, googleProvider)
       .then((res) => {
-        console.log(res);
         setUser(res.user);
-        toast.success('Google sign-in successful');
-        nevigate(form);
-      }).catch((err) => {
-        console.log(err);
-        toast.error(err.message);
+        toast.success("Google login successful");
+        navigate("/dashboard", { replace: true });
       })
+      .catch((err) => toast.error(err.message));
+  };
 
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center text-white">
+        Loading...
+      </div>
+    );
   }
 
-
-
   return (
-    <div className="hero bg-base-200 min-h-screen">
-      <div className="hero-content flex-col lg:flex-row-reverse">
-        <div className="text-center lg:text-left">
-          <h1 className="text-5xl font-bold">Login now!</h1>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-black to-gray-900 px-4">
+      <div className="w-full max-w-4xl bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl shadow-2xl grid grid-cols-1 md:grid-cols-2 overflow-hidden">
 
+        {/* LEFT INFO */}
+        <div className="hidden md:flex flex-col justify-center p-10 text-white">
+          <h1 className="text-4xl font-bold mb-4">Welcome Back 👋</h1>
+          <p className="text-gray-300 mb-6">
+            Login to continue your journey on our AI-powered freelancing platform.
+          </p>
+
+          <ul className="space-y-3 text-sm text-gray-400">
+            <li>✔ AI Skill Gap Analysis</li>
+            <li>✔ Smart Wallet & Secure Payments</li>
+            <li>✔ Verified Profiles</li>
+            <li>✔ Real-time Collaboration</li>
+          </ul>
         </div>
-        <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-          <div className="card-body">
-            <form onSubmit={handleLogin} >
-                <fieldset className="fieldset">
-                  <label className="label">Email</label>
-                  <input ref={emailref} type="email" name='email' className="input" placeholder="Email" />
-                  <div className='relative'>
-                    <label className="label">Password</label>
-                    <input type={show ? "text" : "password"} name='password' className="input" placeholder="Password" />
-                    <span onClick={() => setShow(!show)} className='absolute right-5 top-9 cursor-pointer'>{show ? <FaEye /> : <IoEyeOff />}</span>
-                  </div>
-                  <div>
-                    <button
-                      type="button"
-                      onClick={handleReset}
-                      className="link link-hover"
-                    >
-                      Forgot password?
-                    </button>
-                  </div>
-                  <p>Have not account? <Link to='/signup' className="link link-hover text-blue-500">Sign up</Link></p>
-                  <button className="btn btn-neutral mt-4">Login</button>
-                  {/* divider */}
-                  <div className='flex items-center justify-center gap-2 my-2'>
-                    <div className='h-px w-16 bg-white/70'></div>
-                    <span className='text-sm text-white/70'>or</span>
-                    <div className='h-px w-16 bg-white/70'></div>
-                  </div>
-                  <button onClick={handleGoogleSignIn} className="btn btn-outline btn-neutral mt-4 text-white cursor-pointer"> <FaGoogle />
-                    Login with Google</button>
-                </fieldset>
-              </form>
-          </div>
+
+        {/* RIGHT FORM */}
+        <div className="p-8 md:p-10">
+          <h2 className="text-3xl font-bold text-white text-center mb-6">
+            Login to Your Account
+          </h2>
+
+          <form onSubmit={handleLogin} className="space-y-4">
+
+            {/* Email */}
+            <div>
+              <label className="text-sm text-gray-300">Email</label>
+              <input
+                ref={emailRef}
+                type="email"
+                name="email"
+                placeholder="you@example.com"
+                className="w-full mt-1 px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white focus:outline-none focus:border-emerald-500"
+                required
+              />
+            </div>
+
+            {/* Password */}
+            <div className="relative">
+              <label className="text-sm text-gray-300">Password</label>
+              <input
+                type={show ? "text" : "password"}
+                name="password"
+                placeholder="Enter your password"
+                className="w-full mt-1 px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white focus:outline-none focus:border-emerald-500"
+                required
+              />
+              <span
+                onClick={() => setShow(!show)}
+                className="absolute right-4 top-10 cursor-pointer text-gray-400"
+              >
+                {show ? <FaEye /> : <IoEyeOff />}
+              </span>
+            </div>
+
+            {/* Actions */}
+            <div className="flex justify-between text-sm text-gray-400">
+              <button
+                type="button"
+                onClick={handleReset}
+                className="hover:text-emerald-400 transition"
+              >
+                Forgot password?
+              </button>
+              <Link to="/signup" className="hover:text-emerald-400 transition">
+                Create account
+              </Link>
+            </div>
+
+            {/* Login Button */}
+            <button className="w-full py-3 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-semibold transition">
+              Login
+            </button>
+
+            {/* Divider */}
+            <div className="flex items-center gap-3 my-4">
+              <div className="flex-1 h-px bg-white/20"></div>
+              <span className="text-sm text-gray-400">OR</span>
+              <div className="flex-1 h-px bg-white/20"></div>
+            </div>
+
+            {/* Google Login */}
+            <button
+              type="button"
+              onClick={handleGoogleSignIn}
+              className="w-full py-3 rounded-xl border border-white/20 text-white flex items-center justify-center gap-2 hover:bg-white/10 transition"
+            >
+              <FaGoogle /> Continue with Google
+            </button>
+          </form>
+
+          {/* Role Info */}
+          <p className="text-center text-xs text-gray-500 mt-6">
+            One account works for both{" "}
+            <span className="text-white">Freelancers</span> &{" "}
+            <span className="text-white">Service Providers</span>
+          </p>
         </div>
       </div>
     </div>
