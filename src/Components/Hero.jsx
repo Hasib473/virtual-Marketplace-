@@ -1,16 +1,16 @@
 // ModernHero.jsx
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import sliderimg from "../assets/slideronly.webp"
-import slider2img from "../assets/s2.jfif"
-import slider3img from "../assets/images.jfif"
+import sliderimg from "../assets/firstimg.png"
+import slider2img from "../assets/freelanceimg.png"
+import slider3img from "../assets/frrimg.png"
 
 const slides = [
   {
     id: 1,
     title: "Grow Your Skills, Unlock Opportunities",
     subtitle: "Connect, collaborate, and achieve more with our platform.",
-    image: sliderimg,
+    image: sliderimg
   },
   {
     id: 2,

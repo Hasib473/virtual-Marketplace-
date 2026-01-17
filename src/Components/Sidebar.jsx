@@ -20,7 +20,7 @@ const Sidebar = () => {
         </NavLink>
 
         <NavLink to="/dashboard/skills" className={linkClass}>
-          🧠 Skill Analyzer
+          🧠 Find the jobs
         </NavLink>
 
         <NavLink to="/dashboard/collaboration" className={linkClass}>

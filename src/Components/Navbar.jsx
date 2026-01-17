@@ -47,6 +47,7 @@ const Navbar = () => {
           </ul>
         </div>
         <a className="btn btn-ghost text-xl"><img className='w-10 h-10 rounded-full' src={logoimg} alt="img" /></a>
+         <p className='text-2xl font-extrabold text-white'><span className='text-emerald-400'>FREELANCER</span>-BANGLA</p>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
@@ -56,6 +57,9 @@ const Navbar = () => {
           </li>
          {
           user &&  <li><Active to='/contact'>Contact</Active></li>
+         }
+         {
+          user && <li><Active to='/dashboard' >User Dashboard</Active></li>
          }
         </ul>
       </div>
