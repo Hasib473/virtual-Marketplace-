@@ -1,3 +1,4 @@
+import { BriefcaseBusiness, CircleDollarSign, House, LayoutDashboard, Podcast, Sprout, UserPen } from "lucide-react";
 import { NavLink } from "react-router";
 
 const Sidebar = () => {
@@ -12,39 +13,43 @@ const Sidebar = () => {
 
       <nav className="space-y-3 text-gray-400">
         <NavLink to="/dashboard" className={linkClass}>
-          🏠 Dashboard Home
+         <div className="flex items-center">
+             <House /> Dashboard Home
+         </div>
         </NavLink>
 
         <NavLink to="/dashboard/my-profile" className={linkClass}>
-          👤 My Profile
+        <div className="flex items-center">
+            <UserPen /> My Profile
+        </div> 
         </NavLink>
 
-        <NavLink to="/dashboard/skills" className={linkClass}>
-          🧠 Find the jobs
+        <NavLink to="jobsearch" className={linkClass}>
+          <div className="flex items-center">
+            <BriefcaseBusiness />
+            Find work
+          </div>
         </NavLink>
 
-        <NavLink to="/dashboard/collaboration" className={linkClass}>
-          🤝 Collaboration
+        <NavLink to="smartWallet" className={linkClass}>
+          <div className="flex items-center"><CircleDollarSign /> Wallet</div>
         </NavLink>
 
-        <NavLink to="/dashboard/voice-to-text" className={linkClass}>
-          🎙 Voice to Text
-        </NavLink>
-
-        <NavLink to="/dashboard/wallet" className={linkClass}>
-          💰 Wallet
-        </NavLink>
-
-        <NavLink to="/dashboard/nearby-jobs" className={linkClass}>
-          📍 Nearby Jobs
+        <NavLink to="subscription" className={linkClass}>
+       <div className="flex items-center">
+          <Podcast /> Subscription
+       </div>
         </NavLink>
 
         <NavLink to="/dashboard/growth" className={linkClass}>
-          📈 Growth
+          <div className="flex items-center"><Sprout /> Growth</div>
         </NavLink>
 
-        <NavLink to="/dashboard/settings" className={linkClass}>
-          ⚙ Settings
+        <NavLink to="/clientDashboard" className={linkClass}>
+            <div className="flex items-center">
+                <LayoutDashboard />
+                Client Dashboard
+            </div>
         </NavLink>
       </nav>
     </aside>

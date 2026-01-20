@@ -83,10 +83,10 @@ const ModernHero = () => {
           className="flex flex-col sm:flex-row gap-4"
         >
           <button className="bg-emerald-500 hover:bg-emerald-600 text-white px-8 py-3 rounded-sm font-semibold shadow-lg transition-all duration-300">
-            Get Started
+            Hire a Freelancer
           </button>
           <button className="bg-white hover:bg-gray-100 text-gray-900 px-8 py-3 rounded-sm font-semibold shadow-lg transition-all duration-300">
-            Learn More
+            Earn Money Freelancing
           </button>
         </motion.div>
       </div>

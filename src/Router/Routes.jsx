@@ -12,6 +12,11 @@ import SignUp from "../Pages/SignUp";
 import PrivetRoute from "../privetRoute/PrivetRoute";
 import MyProfile from "../Pages/MyProfile";
 import DashboardHome from "../Pages/DashboardHome";
+import JobSearch from "../Pages/JobSearch";
+import SmartWallet from "../Pages/SmartWallet";
+import Subscription from "../Pages/Subscription";
+import ClientDashboad from "../Pages/ClientdashboardHome";
+import ClientDashboardLayout from "../Layout/ClientDashboardLayout ";
 
 export const router = createBrowserRouter([
   {
@@ -43,7 +48,18 @@ export const router = createBrowserRouter([
     ),
     children: [
       { index: true, element: <DashboardHome /> }, // /dashboard
-      { path: "my-profile", element: <MyProfile /> }, // /dashboard/my-profile
-    ],
+      { path: "my-profile", element: <MyProfile /> },
+      {path: "jobsearch" , Component: JobSearch } ,
+      {path: "smartWallet", Component: SmartWallet},
+      {path: "subscription", Component: Subscription}
+    ]
   },
+
+  {
+    path:"/clientDashboard",
+    element :( <PrivetRoute><ClientDashboardLayout/></PrivetRoute>),
+    children: [
+        {index: true, element : <ClientDashboad/>}
+    ]
+  }
 ]);

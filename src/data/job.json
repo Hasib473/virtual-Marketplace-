@@ -1,0 +1,31 @@
+{
+  "jobs": [
+    {
+      "id": 1,
+      "title": "React Frontend Developer",
+      "category": "Web Development",
+      "budget": "$300 - $500",
+      "location": "Remote",
+      "postedHours": 2,
+      "requiredSkills": ["React", "Tailwind", "JS"]
+    },
+    {
+      "id": 2,
+      "title": "MERN Stack Developer",
+      "category": "Full Stack",
+      "budget": "$800 - $1200",
+      "location": "Dhaka",
+      "postedHours": 6,
+      "requiredSkills": ["React", "Node", "MongoDB"]
+    },
+    {
+      "id": 3,
+      "title": "Firebase Auth Expert",
+      "category": "Backend",
+      "budget": "$200",
+      "location": "Remote",
+      "postedHours": 12,
+      "requiredSkills": ["Firebase", "Auth", "JS"]
+    }
+  ]
+}
