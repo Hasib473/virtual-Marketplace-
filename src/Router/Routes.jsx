@@ -17,6 +17,11 @@ import SmartWallet from "../Pages/SmartWallet";
 import Subscription from "../Pages/Subscription";
 import ClientDashboad from "../Pages/ClientdashboardHome";
 import ClientDashboardLayout from "../Layout/ClientDashboardLayout ";
+import PostJob from "../Pages/PostJobs";
+import VoiceJobPost from "../Pages/VoiceJobPost";
+import MyJobs from "../Pages/MyJob";
+import FindWork from "../Pages/FindWork";
+import HireFreelancer from "../Pages/HireFreelancer";
 
 export const router = createBrowserRouter([
   {
@@ -35,6 +40,12 @@ export const router = createBrowserRouter([
       },
       { path: "login", element: <Login /> },
       { path: "signup", element: <SignUp /> },
+      {
+        path:'findwork', Component: FindWork
+      },
+      {
+        path: 'hireFreelancer', Component: HireFreelancer
+      }
     ],
   },
 
@@ -59,7 +70,15 @@ export const router = createBrowserRouter([
     path:"/clientDashboard",
     element :( <PrivetRoute><ClientDashboardLayout/></PrivetRoute>),
     children: [
-        {index: true, element : <ClientDashboad/>}
+        {index: true, element : <ClientDashboad/>},
+        {
+          path:'postjobs', Component:PostJob },
+          {
+            path:'voicejob', Component: VoiceJobPost
+          },
+          {
+            path:'myjobs', Component: MyJobs
+          }
     ]
   }
 ]);

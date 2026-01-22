@@ -61,8 +61,8 @@ const Navbar = () => {
          {
           user && <li><Active to='/dashboard' >User Dashboard</Active></li>
          }
-         <li><Active to='/hireFreelancer'>Hire Freelancer </Active></li>
-         <li><Active to="/findwork">Find Work</Active></li>
+         <li><Active to='hireFreelancer'>Hire Freelancer </Active></li>
+         <li><Active to="findwork">Find Work</Active></li>
         </ul>
       </div>
       <div className="navbar-end">
